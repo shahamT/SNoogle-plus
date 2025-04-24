@@ -1,0 +1,92 @@
+/* general */
+
+.add-note-create-container {
+    width: 100%;
+    display: grid;
+    grid-template-rows: auto;
+
+    gap: 16px;
+}
+
+.add-note-create-container .header {
+    gap: 16px;
+}
+
+.add-note-create-container .header .add-title {
+    width: 100%;
+    font: inherit;
+    font-weight: 500;
+    color: var(--clr-gray-400);
+}
+
+.add-note-create-container .header .pin-add-btn {
+    width: 32px !important;
+    height: 32px !important;
+}
+
+
+
+.add-note-create-container .note-txt-input {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--clr-gray-500);
+}
+
+.add-note-create-container .note-txt-input::placeholder {
+    color: var(--clr-gray-500);
+}
+
+.add-note-create-container .action-btns{
+justify-content: end;
+}
+
+.add-note-create-container .action-btns .text-btn{
+    font-size: 0.9rem;
+    padding-block: 8px;
+    padding-inline: 24px;
+    color: var(--clr-gray-500);
+}
+.add-note-create-container .action-btns .text-btn:hover{
+    background-color: var(--clr-gray-100);
+}
+
+
+/* todo */
+.add-note-create-container .todo-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.add-note-create-container .todo-list input[type="checkbox"]{
+    cursor: pointer;
+}
+.add-note-create-container .todo-list .clean-input{
+    padding-inline-start: 8px;
+}
+
+
+
+/* img note */
+.add-note-create-container .img-upload-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 80px;
+    border: 3px dashed var(--clr-gray-200);
+
+    border-radius: 16px;
+    color: var(--clr-gray-400);
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.add-note-create-container .img-upload-btn:hover {
+background-color: var(--clr-gray-100);
+border-color: var(--clr-gray-300);;
+}
+
+.add-note-create-container .img-Preview{
+    justify-self: center;
+    border-radius: 16px;
+}

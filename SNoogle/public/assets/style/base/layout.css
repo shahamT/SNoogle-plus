@@ -1,0 +1,18 @@
+.main-layout {
+    grid-template-rows: 80px minmax(1px, 1fr);
+    height: 100vh;
+}
+
+
+
+.main-inline-padding {
+    padding-inline: 0;
+}
+
+.main-header {
+    grid-row: 1;
+}
+
+.main-content {
+    grid-row: 2;
+}

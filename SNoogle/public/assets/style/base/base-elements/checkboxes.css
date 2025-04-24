@@ -1,0 +1,80 @@
+/* checkbox */
+
+.checkbox-wrapper {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    border-radius: var(--border-radius-round);
+    position: relative;
+    cursor: pointer;
+}
+
+.checkbox-wrapper .mail-checkbox {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-70%, -70%);
+}
+
+.mail-checkbox {
+    -webkit-appearance: none;
+    appearance: none;
+    position: relative;
+    width: 16px !important;
+    height: 16px !important;
+    border-radius: 2px;
+    border: 2px solid var(--clr-gray-400);
+    cursor: pointer;
+}
+
+.mail-checkbox:focus {
+    background-color: transparent;
+}
+
+/* draw the checkmark when checked */
+.mail-checkbox:checked::after {
+    content: '';
+    position: absolute;
+    top: 0px;
+    left: 3.5px;
+
+    width: 5px;
+    height: 10px;
+    border: solid var(--clr-gray-400);
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+
+
+/* hover animation */
+.checkbox-wrapper::before {
+    content: "";
+
+    position: absolute;
+    z-index: 0;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: block;
+
+    width: 20%;
+    height: 20%;
+
+
+    background-color: var(--clr-icn-btn-hover);
+    border-radius: var(--border-radius-round);
+
+    opacity: 0;
+    transition: var(--transition-ex-fast);
+}
+
+.checkbox-wrapper:hover::before {
+    opacity: 1;
+
+    width: 100%;
+    height: 100%;
+
+    transition: var(--transition-ex-fast);
+
+}

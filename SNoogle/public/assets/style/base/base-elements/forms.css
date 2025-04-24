@@ -1,0 +1,21 @@
+.clean-input{
+    background-color: transparent;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    padding: 0;
+    height: auto;
+
+
+}
+
+.clean-input:focus{
+    background-color: transparent;
+    border: none;
+    outline: none;
+}
+
+textarea.clean-input {
+    padding-block: 8px;
+    resize: none;
+}

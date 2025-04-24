@@ -1,0 +1,36 @@
+.dialog-overlay {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(221, 221, 221, 0.2); /* Default overlay background */
+    backdrop-filter: blur(2px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 1000;
+  }
+  
+  .dialog-overlay.open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  
+  .dialog-content {
+    background: white;
+    color: black;
+    padding: 2em;
+    border-radius: 0.5em;
+    transform: scale(0.95);
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    max-width: 90%;
+    max-height: 90%;
+    overflow: auto;
+  }
+  
+  .dialog-content.open {
+    transform: scale(1);
+    opacity: 1;
+  }

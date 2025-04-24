@@ -1,0 +1,103 @@
+.about-page {
+    grid-template-columns: minmax(24px, 1fr) minmax(auto, 850px) minmax(24px, 1fr);
+
+    padding-block-start: 32px;
+    padding-block-end: 120px;
+
+    background-color: var(--clr-white);
+    color: var(--clr-gray-500);
+    text-align: center;
+}
+
+.about-page>* {
+    grid-column: 2;
+}
+
+.about-page .title-wraper {
+    margin-block-end: 24px;
+}
+
+.about-page .title-wraper .brand-icon {
+    height: 100px;
+}
+
+.about-page .title-wraper h1 {
+    font-size: 90px;
+    font-weight: 500;
+    color: var(--clr-gray-700);
+}
+
+.about-page .subtitle {
+    font-size: 30px;
+    margin-block-end: 16px;
+}
+
+.about-page .description {
+    font-size: 20px;
+    margin-block-end: 60px;
+}
+
+
+.about-page .apps-wraper {
+    grid-template-columns: 1fr 1fr;
+     gap: 30px;
+ }
+
+.about-page .apps-wraper .app-container {
+    padding: 24px;
+
+    background-color: var(--clr-white);
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    border-radius: 48px;
+    text-align: center;
+    transition: var(--transition-ex-fast);
+}
+
+.about-page .apps-wraper .app-container:hover {
+    transform: scale(105%);
+    box-shadow: rgba(100, 100, 111, 0.4) 0px 7px 29px 0px;
+}
+
+.about-page .apps-wraper .app-container.snail:hover {
+    background-color: rgba(242, 139, 130, 0.1);
+}
+
+.about-page .apps-wraper .app-container.sneep:hover {
+    background-color: rgba(253, 214, 99, 0.1)
+}
+
+
+
+.about-page .apps-wraper .app-container .title-container {
+    gap: 8px;
+    padding-inline: 36px;
+    margin-block-end: 8px;
+}
+
+.about-page .apps-wraper .app-container .title-container .app-l-icon {
+    height: 30px;
+}
+
+.about-page .apps-wraper .app-container .title-container .app-title {
+    font-size: 36px;
+    color: var(--clr-gray-700);
+}
+
+.about-page .apps-wraper .app-container .app-subtitle {
+    font-size: 22px;
+}
+
+.about-page .apps-wraper .app-container .app-icon {
+    width: 300px;
+    border-radius: 32px;
+    padding: 16px;
+}
+
+.about-page .apps-wraper .app-container .app-description {
+    font-size: 18px;
+    padding-inline: 36px;
+}
+
+.about-page .hidden-before-anim {
+    opacity: 0;
+  }

@@ -1,0 +1,146 @@
+.modal-backdrop {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  width: 80vw;
+  height: 80vh;
+  /* background-color: rgba(60, 64, 67, 0.144);  */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+
+  input[type="text"] {
+    font-size: 1.5em;
+    margin-bottom: 1em;
+
+  }
+
+
+  input[type="checkbox"] {
+    all: revert;
+    width: 1.2em;
+    height: 1.2em;
+    cursor: pointer;
+    font: inherit;
+    color: inherit;
+    background-color: transparent;
+  }
+
+  input,
+  textarea {
+    all: unset;
+    box-sizing: border-box;
+    font: inherit;
+    color: inherit;
+    background-color: transparent;
+  }
+
+  textarea {
+    height: 100%;
+  }
+
+}
+
+.modal-window {
+  background-color: white;
+  border-radius: 8px;
+  padding: 16px 20px;
+  height: 900px;
+  width: 600px;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.819);
+  overflow-y: auto;
+}
+
+
+.modal-title {
+  font-size: 1.25rem;
+  font-weight: 500;
+  border: none;
+  outline: none;
+  margin-bottom: 12px;
+}
+
+.modal-text {
+  resize: none;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  flex-grow: 1;
+  min-height: 100px;
+  margin-bottom: 12px;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  align-self: end;
+  margin-top: 10px;
+  margin-top: auto;
+}
+
+.modal-actions .icon-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px 12px;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.modal-actions .icon-btn:hover {
+  background-color: #f1f3f4;
+}
+
+.note-dialog {
+  padding: 0;
+  margin: 0;
+  border: none;
+  background: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.modal-notes-upload {
+  display: flex;
+  font-size: inherit;
+  justify-content: space-around;
+  align-items: center;
+
+  input[type="file"] {
+    display: none;
+  }
+}
+
+.img-modal .img-upload-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 80px;
+  border: 3px dashed var(--clr-gray-200);
+
+  border-radius: 16px;
+  color: var(--clr-gray-400);
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.img-modal .img-upload-btn:hover {
+  background-color: var(--clr-gray-100);
+  border-color: var(--clr-gray-300);
+  ;
+}
+
+.img-modal .img-Preview {
+  justify-self: center;
+  border-radius: 16px;
+}

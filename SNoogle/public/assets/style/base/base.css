@@ -1,0 +1,89 @@
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+html {
+	font-family: var(--font-primary);
+	font-weight: 400;
+	color: var(--clr-black);
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	color: var(--gray3);
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	margin: 0;
+	font-family: var(--font-primary);
+}
+
+a {
+	text-decoration: none;
+	color: unset;
+}
+
+button,
+input,
+select {
+	font-family: var(--font-primary);
+}
+
+
+/* Dont stretch my Media */
+
+img,
+embed,
+video,
+object {
+	display: block;
+	max-width: 100%;
+}
+
+/* Simple and useful CSS Debugging Technique */
+
+.debug * {
+	outline: 1px solid gold;
+}
+
+button {
+	cursor: pointer;
+}
+
+input,
+select,
+textarea{
+	height: 32px;
+	border-radius: 4px;
+	border: none;
+	padding-inline: 16px;
+	font-size: 1.1rem;
+	background-color: rgb(233, 233, 233);
+	transition: background-color 0.2s;
+	font-family: inherit;
+}
+
+input[type="checkbox"] {
+	/* either revert specific properties… */
+	height: auto;
+	background-color: transparent;
+	padding: 0;
+}
+
+input:focus,
+select:focus {
+	background-color: rgb(230, 252, 237);
+}
+
+select {
+	cursor: pointer;
+}

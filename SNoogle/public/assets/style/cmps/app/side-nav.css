@@ -1,0 +1,243 @@
+/* layout */
+.side-nav {
+    z-index: 5;
+    padding-block: var(--px-spacing-sm);
+    gap: var(--px-spacing-md);
+    background-color: var(--clr-bg-light-base);
+    overflow: hidden;
+
+    transition: box-shadow 0.2s;
+}
+
+.side-nav-open .side-nav{
+      box-shadow: 5px 15px 15px rgba(0, 0, 0, 0.35);
+}
+
+.side-nav .side-nav-list ul {
+    align-items: center;
+    width: 100%;
+
+}
+
+.side-nav .side-nav-list ul li {
+    width: 100%;
+    padding-inline-end: 16px;
+
+}
+
+.side-nav .side-nav-list a {
+    align-items: center;
+    justify-content: space-between;
+    padding-inline-start: 74px;
+
+    height: 50px;
+    width: 100%;
+}
+
+
+
+
+/* style */
+
+.side-nav .side-nav-list a .title,
+.side-nav .side-nav-list a .attribute {
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out 0.0s;
+    ;
+
+
+}
+
+.side-nav-open .side-nav .side-nav-list a .title,
+.side-nav-open .side-nav .side-nav-list a .attribute {
+    opacity: 1;
+    transition: opacity 0.2s ease-in-out 0.2s;
+    ;
+
+}
+
+
+.side-nav .side-nav-list a {
+    position: relative;
+    border-radius: var(--border-radius-round);
+    gap: 0px;
+    opacity: 0.7;
+}
+
+.side-nav .side-nav-list a:hover {
+    background-color: var(--clr-gray-150);
+
+}
+
+.side-nav .side-nav-list a.active {
+    background-color: rgba(211, 227, 253, 0);
+    transition: background-color 0.3s;
+    opacity: 1;
+    font-weight: 700;
+}
+
+.side-nav-open .side-nav .side-nav-list a.active {
+    background-color: rgba(211, 227, 253, 1);
+    transition: none
+}
+
+
+
+.side-nav-open .side-nav .side-nav-list a {
+    gap: 12px;
+    padding-inline-end: 16px;
+
+    border-top-right-radius: var(--border-radius-round);
+    border-bottom-right-radius: var(--border-radius-round);
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+}
+
+.side-nav .side-nav-list a .title {}
+
+.side-nav .side-nav-list a .attribute {
+    margin-inline-start: auto;
+}
+
+
+.side-nav .side-nav-list a::before {
+    position: absolute;
+    left: 12px;
+    top: 0px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 50px;
+    height: 50px;
+
+    font-size: 1.5rem;
+    border-radius: var(--border-radius-round);
+    text-align: center;
+}
+
+.side-nav .side-nav-list a.active::before {
+    background-color: #d3e3fd;
+}
+
+
+
+/* icons */
+.side-nav .side-nav-list a.inbox-btn::before {
+    content: "\f01c";
+    font-family: fa;
+}
+
+.side-nav .side-nav-list a.starred-btn::before {
+    content: "\f005";
+    font-family: fa-regular;
+}
+
+.side-nav .side-nav-list a.draft-btn::before {
+    content: "\f15b";
+    font-family: fa-regular;
+}
+
+.side-nav .side-nav-list a.trash-btn::before {
+    content: "\f2ed";
+    font-family: fa-regular;
+}
+.side-nav .side-nav-list a.sent-btn::before {
+    content: "\f1d8";
+    font-family: fa-regular;
+}
+.side-nav .side-nav-list a.unread-btn::before {
+    content: "\f0e0";
+    font-family: fa-regular;
+}
+.side-nav .side-nav-list a.txt-btn::before {
+    content: "\f036";
+    font-family: fa;
+}
+.side-nav .side-nav-list a.todos-btn::before {
+    content: "\f14a";
+    font-family: fa-regular;
+}
+
+
+
+
+/* compose btn */
+
+.mail-side-nav .compose-btn {
+    position: relative;
+    align-self: start;
+
+    margin-inline: 10px;
+    width: 56px;
+    height: 56px;
+    outline: none;
+    border: none;
+
+    border-radius: var(--px-spacing-md);
+    background-color: #c2e7ff;
+
+    transition: 
+    width      0.2s ease,
+    box-shadow 0.2s ease;
+
+}
+
+.mail-side-nav .compose-btn:hover {
+    box-shadow: rgba(99, 99, 99, 0.3) 0px 2px 8px 0px;
+}
+
+.side-nav-open .mail-side-nav .compose-btn {
+    width: 200px;
+
+}
+
+
+.mail-side-nav .compose-btn::before {
+    position: absolute;
+    left: 4px;
+    top: 2px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 50px;
+    height: 50px;
+
+    font-size: 1.5rem;
+    border-radius: var(--border-radius-round);
+    text-align: center;
+}
+
+.mail-side-nav .compose-btn::before {
+    content: "\f303";
+    font-family: fa;
+}
+
+.mail-side-nav .compose-btn::after {
+    content: "Compose";
+    position: absolute;
+    left: 64px;
+    top: 2px;
+
+    display: flex;
+    align-items: center;
+
+    height: 50px;
+
+    font-size: 1rem;
+    font-weight: 500;
+
+    transition: opacity 0.2s ease-in-out 0.0s;
+    opacity: 0;
+    
+}
+
+.side-nav-open .mail-side-nav .compose-btn::after {
+    transition: opacity 0.2s ease-in-out 0.2s;
+    opacity: 1;
+
+    
+}
