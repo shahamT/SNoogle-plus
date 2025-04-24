@@ -1,0 +1,14 @@
+.note-add-container {
+    justify-self: center;
+    align-content: center;
+
+    margin-block: 24px;
+    width: 600px;
+    padding-block: 6px;
+    padding-inline: 16px;
+    height: auto;
+
+    background-color: var(--clr-white);
+    border-radius: var(--border-radius-md);
+    box-shadow: rgba(0, 0, 0, 0.34) 0px 2px 10px;
+}

@@ -1,0 +1,22 @@
+.add-note-collapsed{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;      
+    cursor: text;
+}
+
+.add-note-collapsed .note-add-btns {
+    gap: 8px;
+}
+
+.add-note-collapsed .note-add-btns>* {
+    width: 32px !important;
+    height: 32px !important;
+}
+
+.add-note-collapsed .add-text-note-btn {
+    width: 80%;
+    font: inherit;
+    font-weight: 500;
+    color: var(--clr-gray-500);
+}

@@ -2,6 +2,7 @@ import express from 'express'
 import cookieParser from 'cookie-parser'
 import { mailService } from './services/mail.service.js'
 import { loggerService } from './services/logger.service.js'
+import path from 'path'
 
 const app = express()
 
@@ -17,7 +18,14 @@ app.get('/', (req, res) => res.send('Hello there'))
 
 // get/read for display
 app.get('/api/mail', (req, res) => {
-    mailService.query()
+    const filterBy = {
+        txt: req.query.txt || '',
+        status: req.query.status || '',
+        lables: req.query.lables || [],
+        filterfrom: req.query.filterfrom || null,
+        filterto: req.query.filterto || null,
+    }
+    mailService.query(filterBy)
         .then(mails => {
             res.send(mails)
         })
@@ -103,6 +111,11 @@ app.delete('/api/mail/:mailId', (req, res) => {
             loggerService.error('Cannot remove mail', err)
             res.status(400).send('Cannot remove mail')
         })
+})
+
+//* Fallback route
+app.get('/*all', (req, res) => {
+    res.sendFile(path.resolve('public/index.html'))
 })
 
 const port = 3031

@@ -1,0 +1,67 @@
+/* Setup */
+@import 'setup/vars.css';
+@import 'setup/typography.css';
+@import 'setup/animations.css';
+
+/* Base */
+@import 'base/base.css';
+@import 'base/helpers.css';
+@import 'base/layout.css';
+@import 'base/icons-font.css';
+
+/* Base-Elements*/
+@import 'base/base-elements/buttons.css';
+@import 'base/base-elements/forms.css';
+@import 'base/base-elements/modals.css';
+@import 'base/base-elements/tooltips.css';
+@import 'base/base-elements/checkboxes.css';
+
+
+/* MEDIA QUERIES */
+@import 'setup/mq.css';
+
+
+/* =============== Components ================ */
+/* App-Cmps */
+@import 'cmps/app/root.css';
+@import 'cmps/app/app.css';
+@import 'cmps/app/main-header.css';
+@import 'cmps/app/main-search-bar.css';
+@import 'cmps/app/side-nav.css';
+@import 'cmps/app/not-found.css';
+
+
+/* General-Cmps */
+
+@import 'cmps/general/main-logo.css';
+@import 'cmps/general/flash-msg.css';
+@import 'cmps/general/hamburger-icon.css';
+@import 'cmps/general/modal.css';
+@import 'cmps/general/loader.css';
+
+/* Pages */
+@import 'pages/home.css';
+@import 'pages/about.css';
+@import 'cmps/notes/note-index.css';
+@import 'cmps/mail/mail-index.css';
+
+
+
+/* Notes Cmps */
+@import 'cmps/notes/note-list.css';
+@import 'cmps/notes/note-preview.css';
+@import 'cmps/notes/note-preview-content.css';
+@import 'cmps/notes/note-add-container.css';
+@import 'cmps/notes/note-add-collapssed.css';
+@import 'cmps/notes/note-create-components.css';
+@import 'cmps/notes/color-input.css';
+@import 'cmps/notes/note-edit-modal.css';
+
+
+
+/* Mail Cmps */
+@import 'cmps/mail/mail-list.css';
+@import 'cmps/mail/mail-filter-bar.css';
+@import 'cmps/mail/mail-preview.css';
+@import 'cmps/mail/mail-compose.css';
+@import 'cmps/mail/mail-view.css';

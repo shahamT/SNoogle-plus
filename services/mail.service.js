@@ -4,6 +4,11 @@ import { utilService } from './util.service.js'
 const gMails = utilService.readJsonFile('data/mails.json')
 
 
+const loggedinUser = {
+    email: 'user@snoogle.com',
+    fullname: 'Shaham Tamir'
+  }
+
 export const mailService = {
     query,
     getById,
@@ -11,8 +16,81 @@ export const mailService = {
     remove,
 }
 
-function query() {
+function query(filterBy = {}) {
     let mailsToDisplay = gMails
+    if (filterBy.txt) {
+        const regExp = new RegExp(filterBy.txt, 'i')
+        mailsToDisplay = mailsToDisplay.filter(mail =>
+            regExp.test(mail.subject)
+            || regExp.test(mail.body)
+            || regExp.test(mail.from)
+            || regExp.test(mail.fromName)
+        )
+    }
+    if (filterBy.status) {
+        switch (filterBy.status) {
+            case "inbox":
+                mailsToDisplay = mailsToDisplay.filter(mail =>
+                    mail.to === loggedinUser.email
+                    && mail.removedAt === null
+                    && mail.sentAt
+                )
+                break
+            case "unread":
+                mailsToDisplay = mailsToDisplay.filter(mail =>
+                    mail.to === loggedinUser.email
+                    && !mail.removedAt
+                    && mail.sentAt
+                    && !mail.isRead
+                )
+                break
+
+            case "draft":
+                mailsToDisplay = mailsToDisplay.filter(mail =>
+                    mail.from === loggedinUser.email
+                    && !mail.removedAt
+                    && !mail.sentAt
+                )
+                break
+
+            case "starred":
+                mailsToDisplay = mailsToDisplay.filter(mail =>
+                    mail.isStarred === true
+                    && !mail.removedAt
+                    && mail.sentAt
+                )
+                break
+
+            case "sent":
+                mailsToDisplay = mailsToDisplay.filter(mail =>
+                    mail.from === loggedinUser.email
+                    && !mail.removedAt
+                    && mail.sentAt
+                )
+                break
+
+            case "trash":
+                mailsToDisplay = mailsToDisplay.filter(mail =>
+                    mail.removedAt
+                )
+                break
+
+        }
+    }
+
+    if (filterBy.filterfrom && filterBy.filterfrom !== 'null') {
+        const from = new Date(filterBy.filterfrom).getTime()
+        console.log("from: ", from)
+        mailsToDisplay = mailsToDisplay.filter(mail => mail.sentAt > from)
+    }
+    if (filterBy.filterto && filterBy.filterto !== 'null') {
+        const to = new Date(filterBy.filterto).getTime()
+        console.log("to: ", to)
+        mailsToDisplay = mailsToDisplay.filter(mail => mail.sentAt < to)
+    }
+
+    mailsToDisplay = mailsToDisplay.sort((a, b) => b.sentAt - a.sentAt)
+
     return Promise.resolve(mailsToDisplay)
 }
 
@@ -58,3 +136,16 @@ function _saveMailsToFile() {
         })
     })
 }
+
+
+// function _createmails() {
+//     if (!loadFromStorage(MAIL_DB_KEY) || loadFromStorage(MAIL_DB_KEY).lentgh === 0) {
+//       const mails = _createDemoMails()
+//       saveToStorage(MAIL_DB_KEY, mails)
+//     }
+//   }
+  
+//   function _createDemoMails() {
+//     const mails = demoMails
+//     return mails
+//   } 

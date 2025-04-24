@@ -1,0 +1,48 @@
+
+.note-content-wraper{
+    padding-inline: 8px;
+    padding-block-start: 4px;
+    padding-block-end: 8px;
+
+    white-space: normal;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    font: inherit;
+   
+    color: var(--clr-gray-700);
+}
+
+.note-content-wraper .title{
+   width: 140px;
+   margin-block-end: 8px;
+   font-weight: 400;
+}
+
+.note-content-wraper .note-todos {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.note-content-wraper .note-todos .checkbox{
+    cursor: pointer;
+}
+
+.note-content-wraper .--crossed-todo {
+    text-decoration: line-through;
+    color: var(--clr-gray-300);
+}
+
+.note-content-wraper .todo-line {
+    display: flex;
+    align-items: start;
+    gap: 10px;
+
+}
+
+.note-content-wraper .note-img{
+    margin-block-start: 24px;
+}
+.note-content-wraper .note-img img{
+border-radius: 8px;    
+}
