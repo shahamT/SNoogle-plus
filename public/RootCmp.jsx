@@ -20,7 +20,7 @@ import { NoteEditModal } from "./apps/note/cmps/NoteEditModal.jsx"
 import { AboutPage } from "./pages/AboutPage.jsx"
 import { Signup } from "./pages/Signup.jsx"
 import { authService } from "./services/auth.service.js"
-import { Login } from "./pages/login.jsx"
+import { Login } from "./pages/Login.jsx"
 
 
 
