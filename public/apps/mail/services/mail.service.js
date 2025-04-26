@@ -50,7 +50,7 @@ function getUnreadByStatus() {
   const promises = statuses.map(status =>
     query({ status })
       .then(mails => {
-        mails.filter(m => !m.isRead).length
+        mails.mailsToDisplay.filter(m => !m.isRead).length
       })
 
   );
@@ -92,6 +92,7 @@ function getParamsFromSearchParams(searchParams) {
   const filterto = searchParams.get('filterto') || ''
   const newsubject = searchParams.get('newsubject') || ''
   const newbody = searchParams.get('newbody') || ''
+  const currpage = searchParams.get('currpage') || ''
 
   const cleanParams = getTruthyValues({
     compose,
@@ -102,6 +103,7 @@ function getParamsFromSearchParams(searchParams) {
     filterto,
     newsubject,
     newbody,
+    currpage,
   })
 
   return cleanParams

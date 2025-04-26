@@ -83,6 +83,9 @@ export function MainHeader({ isSideNavPinned, setIsSideNavPinned }) {
                         </svg>
                     </button>
 
+                    <NavLink to="/signup">Signup</NavLink>
+                    <NavLink to="/login">Login</NavLink>
+
                     {isappsMenuVisible === true &&
                         <div className="apps-menu">
                             <ul className="flex space-between clean-list">

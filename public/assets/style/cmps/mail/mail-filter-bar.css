@@ -103,3 +103,14 @@ input[type="date"]::-ms-expand:hover {
     background-color: rgba(138, 180, 248, 0.2);
     border-radius: var(--border-radius-md);
 }
+
+
+/* pagination */
+
+.mail-filter-bar .pagination-container {
+  margin-inline-start: auto;
+}
+.mail-filter-bar .pagination-container .pagination-text {
+    color: var(--clr-gray-500);
+    margin-inline-end: 8px;
+}

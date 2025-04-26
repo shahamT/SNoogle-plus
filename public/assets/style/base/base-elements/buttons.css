@@ -1,3 +1,9 @@
+
+
+
+
+
+
 .text-btn {
     background-color: transparent;
     border: none;
@@ -209,4 +215,11 @@
 .icon-btn .bookmark{
     content: "\f02e";
     font-family: fa;
+}
+
+
+
+button.disabled{
+    opacity: 0.3;
+    pointer-events: none;
 }

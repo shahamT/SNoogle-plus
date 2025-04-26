@@ -18,6 +18,9 @@ import { NoteIndex } from "./apps/note/pages/NoteIndex.jsx"
 import { MailIndex } from "./apps/mail/pages/MailIndex.jsx"
 import { NoteEditModal } from "./apps/note/cmps/NoteEditModal.jsx"
 import { AboutPage } from "./pages/AboutPage.jsx"
+import { Signup } from "./pages/Signup.jsx"
+import { authService } from "./services/auth.service.js"
+import { Login } from "./pages/login.jsx"
 
 
 
@@ -26,6 +29,7 @@ import { AboutPage } from "./pages/AboutPage.jsx"
 
 export function RootCmp() {
     // === Hooks
+    const [loggedinUser, setLoggedinUser] = useState(authService.getLoggedinUser())
     const [isSideNavOpen, setSideNavOpen] = useToggle(false)
     const [isSideNavPinned, setIsSideNavPinned] = useToggle(false)
 
@@ -59,6 +63,8 @@ export function RootCmp() {
                         <Route path="/" element={<Navigate to="/home" />} />
                         <Route path="/home" element={<HomePage />} />
                         <Route path="/about" element={<AboutPage />} />
+                        <Route path="/signup" element={<Signup setLoggedinUser={setLoggedinUser}/>} />
+                        <Route path="/login" element={<Login setLoggedinUser={setLoggedinUser}/>} />
 
 
                         <Route path="/mail" element={<Navigate to="/mail/inbox" replace />} />

@@ -12,12 +12,14 @@ import { mailService } from "../services/mail.service.js"
 export function MailFilterBar({
     initialStart = '',
     initialEnd = '',
+    mailsPageInfo,
 }) {
     // === Hooks
     const [searchParams, setSearchParams] = useSearchParams()
 
     const [startDate, setStartDate] = useState(initialStart)
     const [endDate, setEndDate] = useState(initialEnd)
+
 
     // === Effects
     useEffect(() => {
@@ -97,7 +99,26 @@ export function MailFilterBar({
     }
 
 
-    // if (!data) return <div>Loading...</div>
+    function onNextPage() {
+        let { currpage } = mailService.getParamsFromSearchParams(searchParams)
+        currpage = currpage ? +currpage : 1
+        addParams([{ currpage: currpage + 1 }])
+    }
+    function onPrevPage() {
+        let { currpage } = mailService.getParamsFromSearchParams(searchParams)
+        currpage = currpage ? +currpage : 1
+        addParams([{ currpage: currpage - 1 }])
+    }
+
+    let nextPageClass
+    let prevPageClass
+    let lastItemCount
+    if (mailsPageInfo) {
+        nextPageClass = mailsPageInfo.endIdx >= mailsPageInfo.total ? "disabled" : ""
+        prevPageClass = mailsPageInfo.startIdx <= 0 ? "disabled" : ""
+        lastItemCount = mailsPageInfo.endIdx >= mailsPageInfo.total ? mailsPageInfo.total : mailsPageInfo.endIdx
+    }
+
     return (
         <section className="mail-filter-bar flex">
             <div className="action-btns flex">
@@ -108,8 +129,6 @@ export function MailFilterBar({
                 {/* <button className="mark-unread-btn icon-btn big envelope" ></button> */}
                 {/* <button className="delete-btn icon-btn big trash-can-regular" ></button> */}
             </div>
-
-
 
 
             <div className="date-range-picker flex align-center">
@@ -136,6 +155,14 @@ export function MailFilterBar({
                     />
                 </div>
             </div>
+
+            {mailsPageInfo &&
+                <div className="pagination-container flex align-center">
+                    <p className="pagination-text">{mailsPageInfo.startIdx + 1} - {lastItemCount} of {mailsPageInfo.total}</p>
+                    <button className={`prev-page-btn icon-btn medium chevron-left ${prevPageClass}`} onClick={onPrevPage}></button>
+                    <button className={`next-page-btn icon-btn medium chevron-right ${nextPageClass}`} onClick={onNextPage}></button>
+                </div>
+            }
 
         </section>
     )

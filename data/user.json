@@ -1,0 +1,16 @@
+[
+    {
+        "_id": "u10000",
+        "username": "shaham@snoogle.com",
+        "fullname": "Shaham Tamir",
+        "password": "snoogle2025",
+        "role": "admin"
+    },
+    {
+        "username": "fghjghfj",
+        "password": "gfhjghfj",
+        "fullname": "gfhjgfhj",
+        "_id": "t9sOZ",
+        "role": "user"
+    }
+]

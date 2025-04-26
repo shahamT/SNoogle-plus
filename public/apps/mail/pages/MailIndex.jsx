@@ -28,10 +28,11 @@ export function MailIndex({ isSideNavPinned }) {
 
     const [mails, setMails] = useState(null)
     const [unreadByStatus, setUnreadByStatus] = useState(null)
+    const [mailsPageInfo, setMailsPageInfo] = useState(null)
 
     const [isComposeOpen, setIsComposeOpen] = useState(false)
     const [checkedMails, setCheckedMails] = useState([])
-    const [isLoading, setIsLoading] =useState(false)
+    const [isLoading, setIsLoading] = useState(false)
 
     const [updateList, setUpdateList] = useState(null)
 
@@ -44,7 +45,7 @@ export function MailIndex({ isSideNavPinned }) {
 
         // don't show loading i'f i'm writing an email...
         const composeParam = searchParams.get('compose')
-        if (!composeParam){
+        if (!composeParam) {
             setIsLoading(true)
         }
 
@@ -72,14 +73,16 @@ export function MailIndex({ isSideNavPinned }) {
     function loadMails(filterBy) {
         mailService.query(filterBy)
             .then(mails => {
-                setMails(mails)
+                console.log("mails: ", mails)
+                setMails(mails.mailsToDisplay)
+                setMailsPageInfo({ total: mails.total, startIdx: mails.startIdx, endIdx: mails.endIdx })
                 setIsLoading(false)
             })
             .catch(err => {
                 console.log("err: ", err)
                 showErrorMsg(`somthing went wrong, could not load mails`)
 
-    })
+            })
     }
 
     function loadUnreadByStatus() {
@@ -97,12 +100,12 @@ export function MailIndex({ isSideNavPinned }) {
         return params
     }
 
-    function toggleComposeState() {
-        const params = mailService.getParamsFromSearchParams(searchParams)
-        if (params.compose === 'new') {
-            setIsComposeOpen(true)
-        } else setIsComposeOpen(false)
-    }
+    // function toggleComposeState() {
+    //     const params = mailService.getParamsFromSearchParams(searchParams)
+    //     if (params.compose === 'new') {
+    //         setIsComposeOpen(true)
+    //     } else setIsComposeOpen(false)
+    // }
 
     function onOpenCompose() {
         addParam('compose', 'new')
@@ -265,7 +268,9 @@ export function MailIndex({ isSideNavPinned }) {
                         addParam={addParam}
                         isLoading={isLoading}
                     />
-                    <MailFilterBar />
+                    <MailFilterBar
+                        mailsPageInfo={mailsPageInfo}
+                    />
                 </React.Fragment>
             }
             {mailId && <MailView

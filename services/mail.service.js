@@ -3,6 +3,7 @@ import { utilService } from './util.service.js'
 
 const gMails = utilService.readJsonFile('data/mails.json')
 
+const PAGE_SIZE = 25
 
 const loggedinUser = {
     email: 'user@snoogle.com',
@@ -91,7 +92,14 @@ function query(filterBy = {}) {
 
     mailsToDisplay = mailsToDisplay.sort((a, b) => b.sentAt - a.sentAt)
 
-    return Promise.resolve(mailsToDisplay)
+const total = mailsToDisplay.length
+
+    // pages
+    const startIdx = (filterBy.currpage-1) * PAGE_SIZE 
+    const endIdx = startIdx + PAGE_SIZE
+    mailsToDisplay = mailsToDisplay.slice(startIdx, endIdx )
+
+    return Promise.resolve({mailsToDisplay, total, startIdx, endIdx})
 }
 
 
