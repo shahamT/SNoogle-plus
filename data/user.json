@@ -6,7 +6,6 @@
         "password": "snoogle2025",
         "role": "admin",
         "profileImgURL": "https://robohash.org/Shaham Tamir"
-
     },
     {
         "username": "shahamt@snoogle.com",
@@ -47,5 +46,13 @@
         "_id": "ImEnc",
         "role": "user",
         "profileImgURL": "https://robohash.org/fdghfgdh"
+    },
+    {
+        "username": "gfdhfg@snoogle.com",
+        "password": "dfghfdgh",
+        "fullname": "fghfdgh",
+        "_id": "MEWtL",
+        "role": "user",
+        "profileImgURL": "https://robohash.org/fghfdgh"
     }
 ]

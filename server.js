@@ -1,12 +1,17 @@
 import express from 'express'
 import cookieParser from 'cookie-parser'
+import path from 'path'
+import Cryptr from 'cryptr'
+
 import { mailService } from './services/mail.service.js'
 import { loggerService } from './services/logger.service.js'
-import path from 'path'
 import { userService } from './services/user.service.js'
 import { authService } from './services/auth.service.js'
 
 const app = express()
+
+export const cryptr = new Cryptr(process.env.SECRET1 || 'secret-snoogle-2025')
+
 
 //* Express Config:
 app.use(express.static('public'))
@@ -180,7 +185,7 @@ app.get('/*all', (req, res) => {
     res.sendFile(path.resolve('public/index.html'))
 })
 
-const port = 3031
+const port = process.env.port || 3031
 
 app.listen(port, () =>
     loggerService.info(`Server listening on port http://127.0.0.1:${port}/`)

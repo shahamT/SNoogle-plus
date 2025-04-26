@@ -1,9 +1,6 @@
 import Cryptr from 'cryptr'
 import { userService } from './user.service.js'
-const cryptr = new Cryptr(process.env.SECRET1 || 'secret-snoogle-2025')
-
-
-console.log('process.env.SECRET:', process.env.SECRET1)
+import { cryptr } from '../server.js'
 
 export const authService = {
     checkLogin,
