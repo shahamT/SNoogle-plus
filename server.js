@@ -10,7 +10,7 @@ import { authService } from './services/auth.service.js'
 
 const app = express()
 
-export const cryptr = new Cryptr(process.env.SECRET1 || 'secret-snoogle-2025')
+export const cryptr = new Cryptr(process.env.USER_CRYPTR1 || 'secret-snoogle-2025')
 
 
 //* Express Config:
