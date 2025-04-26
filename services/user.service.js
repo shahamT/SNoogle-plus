@@ -45,6 +45,7 @@ function add(user) {
 
             user._id = utilService.makeId()
             user.role = "user"
+			user.profileImgURL = `https://robohash.org/${user.fullname}`
             //* Later, we will call the authService here to encrypt the password
             users.push(user)
         

@@ -4,13 +4,48 @@
         "username": "shaham@snoogle.com",
         "fullname": "Shaham Tamir",
         "password": "snoogle2025",
-        "role": "admin"
+        "role": "admin",
+        "profileImgURL": "https://robohash.org/Shaham Tamir"
+
     },
     {
-        "username": "fghjghfj",
-        "password": "gfhjghfj",
-        "fullname": "gfhjgfhj",
-        "_id": "t9sOZ",
-        "role": "user"
+        "username": "shahamt@snoogle.com",
+        "password": "12345",
+        "fullname": "shaham tamir",
+        "_id": "ZHI2y",
+        "role": "user",
+        "profileImgURL": "https://robohash.org/Shaham Tamir"
+    },
+    {
+        "username": "sdfgdfs@snoogle.com",
+        "password": "2234543",
+        "fullname": "dfgdsf",
+        "_id": "XDx3h",
+        "role": "user",
+        "profileImgURL": "https://robohash.org/dfgdsf"
+    },
+    {
+        "username": "dfsgdfg@snoogle.com",
+        "password": "dfgdsfgdfs",
+        "fullname": "dsfgdfsg",
+        "_id": "9cybj",
+        "role": "user",
+        "profileImgURL": "https://robohash.org/dsfgdfsg"
+    },
+    {
+        "username": "ssdgdf@snoogle.com",
+        "password": "fgdhfdgh",
+        "fullname": "fgdhfdghfg",
+        "_id": "m8zJv",
+        "role": "user",
+        "profileImgURL": "https://robohash.org/fgdhfdghfg"
+    },
+    {
+        "username": "dfghfdg@snoogle.com",
+        "password": "dfghfdgh",
+        "fullname": "fdghfgdh",
+        "_id": "ImEnc",
+        "role": "user",
+        "profileImgURL": "https://robohash.org/fdghfgdh"
     }
 ]

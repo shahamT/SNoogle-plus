@@ -33,8 +33,17 @@
     width: 50px;
 }
 
-.main-header .apps-menu-wraper {
+
+.main-header .left-side-btns {
     margin-inline-start: auto;
+    gap: 16px;
+}
+
+
+
+/* apps menu */
+
+.main-header .apps-menu-wraper {
     position: relative;
     display: inline-block;
 }
@@ -76,7 +85,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    
+
     width: 100px;
     height: 100px;
 
@@ -85,6 +94,7 @@
     border-radius: 16px;
     text-align: center;
 }
+
 .main-header .apps-menu-wraper .apps-menu a:hover {
     background-color: var(--clr-gray-100);
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
@@ -98,4 +108,98 @@
     width: 60px;
     height: 60px;
     margin-block-end: 2px;
+}
+
+
+
+/* user menu */
+
+.main-header .user-menu-wraper {
+    position: relative;
+    display: inline-block;
+}
+
+.main-header .user-menu-wraper .user-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 6px;
+
+    align-items: center;
+    gap: 16px;
+
+    padding: 32px;
+    min-width: 250px;
+    max-width: fit-content;
+
+    text-align: center;
+    background: #e9eef6;
+    border-radius: 16px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    z-index: 100;
+}
+
+
+.main-header .profile-img-wraper {
+    height: 50px;
+    width: 50px;
+    border-radius: var(--border-radius-round);
+    border-top: 3px solid var(--clr-red-base);
+    border-right: 3px solid var(--clr-blue-base);
+    border-bottom: 3px solid var(--clr-green-base);
+    border-left: 3px solid var(--clr-yellow-base);
+
+    cursor: pointer;
+}
+
+.main-header .profile-img-wraper .profile-img {
+    width: 100%;
+    border-radius: var(--border-radius-round);
+    border: 2px solid var(--clr-bg-light-base);
+    background-color: var(--clr-gray-700);
+}
+
+.main-header .profile-img-wraper:hover .profile-img {
+    border: 2px solid var(--clr-gray-150);
+}
+
+
+/* user menu content */
+.main-header .user-menu .user-email{
+    font-weight: 500;
+}
+.main-header .user-menu .greeting{
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+
+.main-header .user-menu .profile-img-wraper {
+    height: 100px;
+    width: 100px;
+
+    cursor: default;
+}
+
+.main-header .user-menu .profile-img-wraper:hover .profile-img {
+    border: 2px solid var(--clr-bg-light-base);
+}
+
+
+.main-header .user-menu .log-out-btn {
+    height: 42px;
+    padding-inline: var(--px-spacing-mdl);
+
+    border: none;
+    outline: none;
+
+    background-color: var(--clr-blue-l);
+    color: #103d7e;
+    font-weight: 600;
+    font-size: 0.9rem;
+    border-radius: var(--border-radius-round);
+}
+
+.main-header .user-menu .log-out-btn:hover {
+    background-color: #a2c4fa;
 }

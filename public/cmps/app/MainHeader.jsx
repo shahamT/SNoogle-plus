@@ -1,3 +1,4 @@
+import { authService } from "../../services/auth.service.js"
 import { HamburgerIcon } from "../general/HamburgerIcon.jsx"
 import { MainLogo } from "../general/MainLogo.jsx"
 import { MainSearchBar } from "./MainSearchBar.jsx"
@@ -5,13 +6,27 @@ import { MainSearchBar } from "./MainSearchBar.jsx"
 // react
 const { useState, useEffect, useRef } = React
 const { NavLink, useLocation } = ReactRouterDOM
+const { useNavigate } = ReactRouter
 
 
-export function MainHeader({ isSideNavPinned, setIsSideNavPinned }) {
+
+export function MainHeader({
+    isSideNavPinned,
+    setIsSideNavPinned,
+    currentFullPath,
+    loggedinUser,
+    setLoggedinUser }) {
+
+    const navigate = useNavigate()
+
     const { pathname } = useLocation()
     const [isSearchVisible, setIsSearchVisible] = useState(false)
-    const [isappsMenuVisible, setIsappsMenuVisible] = useState(false)
+
+    const [isAppsMenuVisible, setIsappsMenuVisible] = useState(false)
     const appsMenu = useRef(null)
+
+    const [isUserMenuVisible, setIsUserMenuVisible] = useState(false)
+    const userMenu = useRef(null)
 
     useEffect(() => {
         toggleSearchBar()
@@ -25,6 +40,7 @@ export function MainHeader({ isSideNavPinned, setIsSideNavPinned }) {
         }
     }
 
+    // apps menu
 
     //close apps menu when clicking outside
     useEffect(() => {
@@ -38,7 +54,7 @@ export function MainHeader({ isSideNavPinned, setIsSideNavPinned }) {
     }, []);
 
     function onOpenAppsMenu() {
-        if (isappsMenuVisible) {
+        if (isAppsMenuVisible) {
             setIsappsMenuVisible(false)
             return
         }
@@ -47,6 +63,47 @@ export function MainHeader({ isSideNavPinned, setIsSideNavPinned }) {
     function onCloseAppsMenu() {
         setIsappsMenuVisible(false)
     }
+
+    // user menu
+
+    //close user menu when clicking outside
+    useEffect(() => {
+        function handleClickOutside(event) {
+            if (userMenu.current && !userMenu.current.contains(event.target)) {
+                onCloseUserMenu();
+            }
+        }
+        window.addEventListener('mousedown', handleClickOutside);
+        return () => window.removeEventListener('mousedown', handleClickOutside);
+    }, []);
+
+    function onOpenUserMenu() {
+        if (isUserMenuVisible) {
+            setIsUserMenuVisible(false)
+            return
+        }
+        setIsUserMenuVisible(true)
+    }
+    function onCloseUserMenu() {
+        setIsUserMenuVisible(false)
+    }
+
+    function handleLogout() {
+        logout()
+    }
+
+    function logout() {
+        authService.logout()
+            .then(user => {
+                setLoggedinUser(null)
+                navigate('/home')
+            })
+            .catch(err => {
+                console.log(err)
+                showErrorMsg(`Couldn't logout...`)
+            })
+    }
+
 
     return (
         <header className="main-header grid main-inline-layout ">
@@ -67,60 +124,87 @@ export function MainHeader({ isSideNavPinned, setIsSideNavPinned }) {
 
                 {isSearchVisible && <MainSearchBar />}
 
-                <div ref={appsMenu} className="apps-menu-wraper">
+                <div className="left-side-btns flex align-center">
+                    {currentFullPath &&
+                        <React.Fragment>
+                            {loggedinUser &&
+                                <div ref={userMenu} className="user-menu-wraper">
+                                    <div className="profile-img-wraper" onClick={onOpenUserMenu}>
+                                        <img className="profile-img" src={`${loggedinUser.profileImgURL}`} alt="profile-image" />
+                                    </div>
 
-                    <button className="apps-menu-btn icon-btn big" onClick={onOpenAppsMenu}>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" >
-                            <path d="M6 13C6.55 13 7 12.55 7 12C7 11.45 6.55 11 6 11C5.45 11 5 11.45 5 12C5 12.55 5.45 13 6 13Z" stroke="currentColor" strokeWidth="2" />
-                            <path d="M6 7C6.55 7 7 6.55 7 6C7 5.45 6.55 5 6 5C5.45 5 5 5.45 5 6C5 6.55 5.45 7 6 7Z" stroke="currentColor" strokeWidth="2" />
-                            <path d="M6 19C6.55 19 7 18.55 7 18C7 17.45 6.55 17 6 17C5.45 17 5 17.45 5 18C5 18.55 5.45 19 6 19Z" stroke="currentColor" strokeWidth="2" />
-                            <path d="M12 13C12.55 13 13 12.55 13 12C13 11.45 12.55 11 12 11C11.45 11 11 11.45 11 12C11 12.55 11.45 13 12 13Z" stroke="currentColor" strokeWidth="2" />
-                            <path d="M12 7C12.55 7 13 6.55 13 6C13 5.45 12.55 5 12 5C11.45 5 11 5.45 11 6C11 6.55 11.45 7 12 7Z" stroke="currentColor" strokeWidth="2" />
-                            <path d="M12 19C12.55 19 13 18.55 13 18C13 17.45 12.55 17 12 17C11.45 17 11 17.45 11 18C11 18.55 11.45 19 12 19Z" stroke="currentColor" strokeWidth="2" />
-                            <path d="M18 13C18.55 13 19 12.55 19 12C19 11.45 18.55 11 18 11C17.45 11 17 11.45 17 12C17 12.55 17.45 13 18 13Z" stroke="currentColor" strokeWidth="2" />
-                            <path d="M18 7C18.55 7 19 6.55 19 6C19 5.45 18.55 5 18 5C17.45 5 17 5.45 17 6C17 6.55 17.45 7 18 7Z" stroke="currentColor" strokeWidth="2" />
-                            <path d="M18 19C18.55 19 19 18.55 19 18C19 17.45 18.55 17 18 17C17.45 17 17 17.45 17 18C17 18.55 17.45 19 18 19Z" stroke="currentColor" strokeWidth="2" />
-                        </svg>
-                    </button>
+                                    {isUserMenuVisible === true &&
+                                        <div className="user-menu flex flex-column">
+                                            <p className="user-email">aa{loggedinUser.username}</p>
+                                            <div className="profile-img-wraper" >
+                                                <img className="profile-img" src={`${loggedinUser.profileImgURL}`} alt="profile-image" />
+                                            </div>
+                                            <p className="greeting">Hi, {loggedinUser.fullname}!</p>
+                                            <button className="log-out-btn" onClick={handleLogout}>Log out</button>
+                                        </div>}
 
-                    <NavLink to="/signup">Signup</NavLink>
-                    <NavLink to="/login">Login</NavLink>
+                                </div>
+                            }
 
-                    {isappsMenuVisible === true &&
-                        <div className="apps-menu">
-                            <ul className="flex space-between clean-list">
-                                <li>
-                                    <NavLink to="/home" onClick={onCloseAppsMenu}>
-                                        <img src="/assets\img\logo\home-icon.png" alt="" className="app-icon" />
-                                        <p>Home</p>
-                                    </NavLink>
-                                </li>
-                                <li>
-                                    <NavLink to='/mail/inbox' onClick={onCloseAppsMenu}>
-                                        <img src="/assets\img\logo\snail-icon.png" alt="" className="app-icon" />
-                                        <p>SNail</p>
-                                    </NavLink>
-                                </li>
-                                <li>
-                                    <NavLink to="/notes/main" onClick={onCloseAppsMenu}>
-                                        <img src="/assets\img\logo\sneep-icon.png" alt="" className="app-icon" />
-                                        <p>SNeep</p>
-                                    </NavLink>
-                                </li>
-                                <li>
-                                    <NavLink to="/about" onClick={onCloseAppsMenu}>
-                                        <img src="/assets\img\logo\about-icon.png" alt="" className="app-icon" />
-                                        <p>About</p>
-                                    </NavLink>
-                                </li>
-                            </ul>
-                        </div>}
+                            {!loggedinUser &&
+                                <React.Fragment>
+                                    <NavLink to={`/signup?from=${encodeURIComponent(currentFullPath)}`}>Signup</NavLink>
+                                    <NavLink to={`/login?from=${encodeURIComponent(currentFullPath)}`}>Login</NavLink>
+                                </React.Fragment>
+                            }
+                        </React.Fragment>
+                    }
+                    <div ref={appsMenu} className="apps-menu-wraper">
 
+                        <button className="apps-menu-btn icon-btn big" onClick={onOpenAppsMenu}>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" >
+                                <path d="M6 13C6.55 13 7 12.55 7 12C7 11.45 6.55 11 6 11C5.45 11 5 11.45 5 12C5 12.55 5.45 13 6 13Z" stroke="currentColor" strokeWidth="2" />
+                                <path d="M6 7C6.55 7 7 6.55 7 6C7 5.45 6.55 5 6 5C5.45 5 5 5.45 5 6C5 6.55 5.45 7 6 7Z" stroke="currentColor" strokeWidth="2" />
+                                <path d="M6 19C6.55 19 7 18.55 7 18C7 17.45 6.55 17 6 17C5.45 17 5 17.45 5 18C5 18.55 5.45 19 6 19Z" stroke="currentColor" strokeWidth="2" />
+                                <path d="M12 13C12.55 13 13 12.55 13 12C13 11.45 12.55 11 12 11C11.45 11 11 11.45 11 12C11 12.55 11.45 13 12 13Z" stroke="currentColor" strokeWidth="2" />
+                                <path d="M12 7C12.55 7 13 6.55 13 6C13 5.45 12.55 5 12 5C11.45 5 11 5.45 11 6C11 6.55 11.45 7 12 7Z" stroke="currentColor" strokeWidth="2" />
+                                <path d="M12 19C12.55 19 13 18.55 13 18C13 17.45 12.55 17 12 17C11.45 17 11 17.45 11 18C11 18.55 11.45 19 12 19Z" stroke="currentColor" strokeWidth="2" />
+                                <path d="M18 13C18.55 13 19 12.55 19 12C19 11.45 18.55 11 18 11C17.45 11 17 11.45 17 12C17 12.55 17.45 13 18 13Z" stroke="currentColor" strokeWidth="2" />
+                                <path d="M18 7C18.55 7 19 6.55 19 6C19 5.45 18.55 5 18 5C17.45 5 17 5.45 17 6C17 6.55 17.45 7 18 7Z" stroke="currentColor" strokeWidth="2" />
+                                <path d="M18 19C18.55 19 19 18.55 19 18C19 17.45 18.55 17 18 17C17.45 17 17 17.45 17 18C17 18.55 17.45 19 18 19Z" stroke="currentColor" strokeWidth="2" />
+                            </svg>
+                        </button>
+
+
+
+                        {isAppsMenuVisible === true &&
+                            <div className="apps-menu">
+                                <ul className="flex space-between clean-list">
+                                    <li>
+                                        <NavLink to="/home" onClick={onCloseAppsMenu}>
+                                            <img src="/assets\img\logo\home-icon.png" alt="" className="app-icon" />
+                                            <p>Home</p>
+                                        </NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink to='/mail/inbox' onClick={onCloseAppsMenu}>
+                                            <img src="/assets\img\logo\snail-icon.png" alt="" className="app-icon" />
+                                            <p>SNail</p>
+                                        </NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink to="/notes/main" onClick={onCloseAppsMenu}>
+                                            <img src="/assets\img\logo\sneep-icon.png" alt="" className="app-icon" />
+                                            <p>SNeep</p>
+                                        </NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink to="/about" onClick={onCloseAppsMenu}>
+                                            <img src="/assets\img\logo\about-icon.png" alt="" className="app-icon" />
+                                            <p>About</p>
+                                        </NavLink>
+                                    </li>
+                                </ul>
+                            </div>}
+
+                    </div>
                 </div>
 
-                {/* <nav className="main-nav">
-                    
-                </nav> */}
             </div>
         </header>
     )

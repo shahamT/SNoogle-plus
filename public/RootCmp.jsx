@@ -1,7 +1,7 @@
 // === React
-const { useState, useEffect } = React
+const { useState, useEffect, useRef } = React
 const Router = ReactRouterDOM.BrowserRouter
-const { Routes, Route, Navigate } = ReactRouterDOM
+const { Routes, Route, Navigate, useLocation } = ReactRouterDOM
 
 // === Services
 import { useToggle } from "./custom-hooks/useToggle.js"
@@ -29,15 +29,27 @@ import { Login } from "./pages/login.jsx"
 
 export function RootCmp() {
     // === Hooks
+    const { pathname } = useLocation()
+    const location = useLocation()
+    const [currentFullPath, setCurrentFullPath] = useState(null)
+
     const [loggedinUser, setLoggedinUser] = useState(authService.getLoggedinUser())
+
     const [isSideNavOpen, setSideNavOpen] = useToggle(false)
     const [isSideNavPinned, setIsSideNavPinned] = useToggle(false)
 
     // === Effects
+    // save the current page url
+    useEffect(() => {
+        if (location.pathname.startsWith('/signup') || location.pathname.startsWith('/login')) return
+        const fullPath = location.pathname + location.search
+        setCurrentFullPath(fullPath)
+      }, [location])
+
 
     useEffect(() => {
         const unsubscribe = eventBusService.on('toggle-side-bar', (state) => {
-                setSideNavOpen(state)
+            setSideNavOpen(state)
         })
         return unsubscribe
     }, [])
@@ -52,36 +64,45 @@ export function RootCmp() {
     // === Functions
 
     const sideNanClass = isSideNavOpen ? "side-nav-open" : ""
+    let showMainHeader = pathname.startsWith('/login') || pathname.startsWith('/signup') ? false : true
+    let pageLayout = pathname.startsWith('/login') || pathname.startsWith('/signup') ? 'clear-layout' : 'main-layout'
+
+
 
     return (
-        <Router>
-            <section className={`app grid main-layout ${sideNanClass}`}>
-                <MainHeader isSideNavPinned={isSideNavPinned} setIsSideNavPinned={setIsSideNavPinned} />
+        <section className={`app grid ${pageLayout} ${sideNanClass}`}>
+            {showMainHeader &&
+                <MainHeader
+                    isSideNavPinned={isSideNavPinned}
+                    setIsSideNavPinned={setIsSideNavPinned}
+                    currentFullPath={currentFullPath}
+                    loggedinUser={loggedinUser}
+                    setLoggedinUser={setLoggedinUser}
+                />}
 
-                <main className="main-content main-inline-layout">
-                    <Routes>
-                        <Route path="/" element={<Navigate to="/home" />} />
-                        <Route path="/home" element={<HomePage />} />
-                        <Route path="/about" element={<AboutPage />} />
-                        <Route path="/signup" element={<Signup setLoggedinUser={setLoggedinUser}/>} />
-                        <Route path="/login" element={<Login setLoggedinUser={setLoggedinUser}/>} />
+            <main className="main-content main-inline-layout">
+                <Routes>
+                    <Route path="/" element={<Navigate to="/home" />} />
+                    <Route path="/home" element={<HomePage />} />
+                    <Route path="/about" element={<AboutPage />} />
+                    <Route path="/signup" element={<Signup setLoggedinUser={setLoggedinUser} />} />
+                    <Route path="/login" element={<Login setLoggedinUser={setLoggedinUser} />} />
 
 
-                        <Route path="/mail" element={<Navigate to="/mail/inbox" replace />} />
-                        <Route path="/mail/:status/" element={<MailIndex isSideNavPinned={isSideNavPinned}/>} />
-                        <Route path="/mail/:status/view/:mailId" element={<MailIndex isSideNavPinned={isSideNavPinned}/>} />
+                    <Route path="/mail" element={<Navigate to="/mail/inbox" replace />} />
+                    <Route path="/mail/:status/" element={<MailIndex isSideNavPinned={isSideNavPinned} />} />
+                    <Route path="/mail/:status/view/:mailId" element={<MailIndex isSideNavPinned={isSideNavPinned} />} />
 
 
-                        <Route path="/notes" element={<NoteIndex isSideNavPinned={isSideNavPinned}/>} />
-                        <Route path="/notes/edit/:noteId" element={<NoteIndex isSideNavPinned={isSideNavPinned}/>} />
-                        <Route path="/notes/:status/" element={<NoteIndex isSideNavPinned={isSideNavPinned}/>} />
+                    <Route path="/notes" element={<NoteIndex isSideNavPinned={isSideNavPinned} />} />
+                    <Route path="/notes/edit/:noteId" element={<NoteIndex isSideNavPinned={isSideNavPinned} />} />
+                    <Route path="/notes/:status/" element={<NoteIndex isSideNavPinned={isSideNavPinned} />} />
 
-                        <Route path="*" element={<NotFound />} />
-                    </Routes>
-                </main>
-                <FlashMsg />
-                <GlobalDialog />
-            </section>
-        </Router>
+                    <Route path="*" element={<NotFound />} />
+                </Routes>
+            </main>
+            <FlashMsg />
+            <GlobalDialog />
+        </section>
     )
 } 

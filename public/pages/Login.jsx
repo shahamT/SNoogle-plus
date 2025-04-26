@@ -1,5 +1,7 @@
 const { useState } = React
 const { useNavigate } = ReactRouter
+const {useSearchParams } = ReactRouterDOM
+
 
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
 import { userService } from '../services/user.service.js'
@@ -7,11 +9,11 @@ import { authService } from '../services/auth.service.js'
 
 
 export function Login({ setLoggedinUser }) {
+    const [searchParams] = useSearchParams()
+    const navigate = useNavigate()
 
-    // const [isSignup, setIsSignUp] = useState(false)
     const [credentials, setCredentials] = useState(userService.getEmptyCredentials())
 
-    const navigate = useNavigate()
 
     function handleChange({ target }) {
         const { name: field, value } = target
@@ -28,7 +30,7 @@ export function Login({ setLoggedinUser }) {
             .then(user => {
                 setLoggedinUser(user)
                 showSuccessMsg('Logged in successfully')
-                navigate('/car')
+                onGoBack()
             })
             .catch(err => {
                 console.log(err)
@@ -36,38 +38,60 @@ export function Login({ setLoggedinUser }) {
             })
     }
 
-    return (
-        <div className="login-page">
-            <form className="login-form" onSubmit={handleSubmit}>
-                <input
-                    type="text"
-                    name="username"
-                    value={credentials.username}
-                    placeholder="Username"
-                    onChange={handleChange}
-                    required
-                    autoFocus
-                />
-                <input
-                    type="password"
-                    name="password"
-                    value={credentials.password}
-                    placeholder="Password"
-                    onChange={handleChange}
-                    required
-                    autoComplete="off"
-                />
-               
-                <button>{'Login'}</button>
-            </form>
+    function onGoBack() {
+        const from = searchParams.get('from')
 
-            <div className="btns">
-                <a href="#" onClick={() => setIsSignUp(isSignup => !isSignup)}>
-                    {/* {isSignup ?
+        if (from) {
+            navigate(from)
+        } else {
+            navigate('/home')
+        }
+    }
+
+    return (
+        <div className="login auth-page">
+            <div className="auth-container">
+
+                <button className="back-btn icon-btn big arrow-left" onClick={onGoBack}></button>
+
+                <img src="/assets/img/logo/sn-icon.png" alt="" className="logo" />
+
+                <div className="title-container">
+                    <h1 className="title">Log in</h1>
+                    <p className="subtitle">Use your snoogle email address</p>
+                </div>
+
+                <form className="login-form auth-form" onSubmit={handleSubmit}>
+                    <input
+                        type="text"
+                        name="username"
+                        value={credentials.username}
+                        placeholder="Username"
+                        onChange={handleChange}
+                        required
+                        autoFocus
+                    />
+                    <input
+                        type="password"
+                        name="password"
+                        value={credentials.password}
+                        placeholder="Password"
+                        onChange={handleChange}
+                        required
+                        autoComplete="off"
+                    />
+
+                    <button className="submit-btn">Login</button>
+                </form>
+
+                <div className="btns">
+                    <a href="#" onClick={() => setIsSignUp(isSignup => !isSignup)}>
+                        {/* {isSignup ?
                         'Already a member? Login' :
                         'New user? Signup here'
                     } */}
-                </a >
+                    </a >
+                </div>
             </div>
         </div >
     )

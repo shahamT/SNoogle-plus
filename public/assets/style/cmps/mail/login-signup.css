@@ -1,0 +1,121 @@
+.auth-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 100%;
+
+    background-color: rgb(30 31 32);
+}
+
+.auth-container {
+    position: relative;
+
+    display: grid;
+    grid-template-columns: auto auto;
+    column-gap: 48px;
+
+    padding: var(--px-spacing-lg);
+
+    border-radius: 32px;
+    background-color: rgb(14 14 14);
+}
+
+.auth-container .logo {
+    grid-column: 1/-1;
+    height: 40px;
+    margin-block-end: var(--px-spacing-mdl);
+}
+
+.auth-container .title-container {
+    grid-column: 1;
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--px-spacing-mdl);
+
+    color: var(--clr-gray-150);
+}
+
+.auth-container .title-container .title {
+    font-size: 36px;
+    font-weight: 400;
+}
+
+.auth-container .title-container .subtitle {
+    font-size: 16px;
+    font-weight: 300;
+
+}
+
+.auth-container .auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--px-spacing-mdl);
+}
+
+.auth-container .auth-form input {
+    min-width: 350px;
+    max-width: 450px;
+    height: 52px;
+    background-color: transparent;
+    border: 1px solid var(--clr-gray-400);
+    color: var(--clr-gray-150);
+}
+
+.auth-container .auth-form input:focus {
+    outline: none;
+    border: 2px solid var(--clr-blue-l);
+}
+
+.email-input-wraper {
+    position: relative;
+}
+
+.auth-container .auth-form .username {
+    padding-inline-end: 130px;
+}
+
+.auth-container .auth-form .email-input-wraper::after {
+    content: '@snoogle.com';
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translate(0, -50%);
+    display: block;
+    color: var(--clr-gray-150);
+    font-size: 1.1rem;
+    font-family: inherit;
+    font-weight: 400;
+
+}
+
+.auth-container .auth-form .submit-btn {
+    align-self: end;
+    height: 42px;
+    padding-inline: var(--px-spacing-mdl);
+
+    border: none;
+    outline: none;
+
+    background-color: var(--clr-blue-l);
+    color: #103d7e;
+    font-weight: 600;
+    font-size: 0.9rem;
+    border-radius: var(--border-radius-round);
+}
+
+.auth-container .auth-form .submit-btn:hover {
+    background-color: #a2c4fa;
+}
+
+.auth-container .back-btn {
+    position: absolute;
+    top: -56px;
+    left: 32px;
+    color: var(--clr-gray-150);
+}
+
+.auth-container .back-btn::before {
+background-color: rgba(255, 255, 255, 0.2);
+}
